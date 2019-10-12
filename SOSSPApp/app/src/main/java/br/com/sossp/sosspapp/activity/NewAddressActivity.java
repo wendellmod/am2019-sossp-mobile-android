@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import br.com.sossp.sosspapp.R;
 
-public class OccurrenceActivity extends AppCompatActivity {
+public class NewAddressActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_occurrence);
+        setContentView(R.layout.activity_new_address);
     }
 }

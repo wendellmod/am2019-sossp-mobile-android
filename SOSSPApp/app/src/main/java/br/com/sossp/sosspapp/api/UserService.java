@@ -8,12 +8,16 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by wendellmod
  */
 
 public interface UserService {
+
+    @GET("user")
+    Call<User> getUserByEmail(@Query(value = "userEmail", encoded = true) String userEmail);
 
     @GET("user/{idUser}")
     Call<User> getUser(@Path("idUser") Long idUser);

@@ -14,6 +14,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -25,11 +26,23 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.Menu;
 
 import br.com.sossp.sosspapp.R;
+import br.com.sossp.sosspapp.api.UserService;
+import br.com.sossp.sosspapp.config.ConfigurationFirebase;
 import br.com.sossp.sosspapp.fragment.MapFragment;
+import br.com.sossp.sosspapp.models.User;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private Retrofit retrofit;
+    private UserService userService;
+
+    public static final String API_BASE_URL = "http://10.0.2.2:8080/api/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +50,17 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(API_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        userService = retrofit.create(UserService.class);
+
+        FirebaseUser firebaseUser = ConfigurationFirebase.getFirebaseAuth().getCurrentUser();
+        String userEmail = firebaseUser.getEmail();
+
+        getUserByEmail(userEmail);
 
         MapFragment mapFragment = new MapFragment();
         getFragment(mapFragment);
@@ -103,7 +127,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_occurrence) {
 
-            startActivity(new Intent(this, OccurrenceActivity.class));
+            startActivity(new Intent(this, NewOccurrenceActivity.class));
 
         } else if (id == R.id.nav_contacts) {
 
@@ -131,6 +155,29 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frameContainer, fragment );
         fragmentTransaction.commit();
+    }
+
+    public void getUserByEmail(String email) {
+
+        Call<User> call = userService.getUserByEmail(email);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    User userResponse = response.body();
+                    Long id = userResponse.getUserId();
+                    String emailU = userResponse.getEmail();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
+
+
     }
 
 }

@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import br.com.sossp.sosspapp.R;
 
-public class UserActivity extends AppCompatActivity {
+public class UserListAddressesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.activity_user_list_addresses);
     }
 }
