@@ -13,13 +13,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.NewOccurrenceActivity"></activity>
-        <activity android:name=".activity.UserAddressActivity" />
+
+        <activity
+            android:name=".activity.NewOccurrenceActivity"
+            android:parentActivityName=".activity.MainActivity" />
+
+        <activity
+            android:name=".activity.UserProfileActivity"
+            android:parentActivityName=".activity.MainActivity"/>
         <activity android:name=".activity.UserListAddressesActivity" />
         <activity android:name=".activity.NewAddressActivity" />
+        <activity android:name=".activity.UserAddressActivity" />
         <activity android:name=".activity.UserOccurrenceActivity" />
         <activity android:name=".activity.UserListOccurrencesActivity" />
-        <activity android:name=".activity.StatisticsActivity" />
+
+        <activity
+            android:name=".activity.StatisticsActivity"
+            android:parentActivityName=".activity.MainActivity" />
+
         <activity
             android:name=".activity.ContactsEmergencyActivity"
             android:parentActivityName=".activity.MainActivity" />

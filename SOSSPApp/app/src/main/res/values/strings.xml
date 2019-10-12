@@ -41,6 +41,9 @@
 
     <string name="title_activity_maps">Map</string>
 
+    <string name="title_activity_profile_user">Perfil</string>
+    <string name="input_tag">Tag</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

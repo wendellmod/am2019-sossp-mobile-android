@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity
 
     private Retrofit retrofit;
     private UserService userService;
+    private User user;
 
     public static final String API_BASE_URL = "http://10.0.2.2:8080/api/";
 
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity
         FirebaseUser firebaseUser = ConfigurationFirebase.getFirebaseAuth().getCurrentUser();
         String userEmail = firebaseUser.getEmail();
 
+        user = new User();
+
         getUserByEmail(userEmail);
 
         MapFragment mapFragment = new MapFragment();
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -119,6 +123,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Long idUser = user.getUserId();
 
         if (id == R.id.nav_home) {
 
@@ -127,15 +132,15 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_occurrence) {
 
-            startActivity(new Intent(this, NewOccurrenceActivity.class));
+            startActivity(new Intent(this, NewOccurrenceActivity.class).putExtra("idUser", idUser));
 
         } else if (id == R.id.nav_contacts) {
 
-            startActivity(new Intent(this, ContactsEmergencyActivity.class));
+            startActivity(new Intent(this, ContactsEmergencyActivity.class).putExtra("idUser", idUser));
 
         } else if (id == R.id.nav_statistics) {
 
-            startActivity(new Intent(this, StatisticsActivity.class));
+            startActivity(new Intent(this, StatisticsActivity.class).putExtra("idUser", idUser));
 
         } else if (id == R.id.nav_settings) {
 
@@ -166,8 +171,8 @@ public class MainActivity extends AppCompatActivity
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     User userResponse = response.body();
-                    Long id = userResponse.getUserId();
-                    String emailU = userResponse.getEmail();
+                    Long idUser = userResponse.getUserId();
+                    user.setUserId(idUser);
                 }
             }
 
@@ -177,7 +182,11 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+    }
 
+    public void toProfile(View view) {
+        Long idUser = user.getUserId();
+        startActivity(new Intent(this, UserProfileActivity.class).putExtra("idUser", idUser));
     }
 
 }
