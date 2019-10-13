@@ -3,8 +3,10 @@ package br.com.sossp.sosspapp.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -60,16 +62,13 @@ public class RegisterActivity extends AppCompatActivity {
         txtEmail = findViewById(R.id.inputEmail);
         txtPassword = findViewById(R.id.inputPassword);
         txtConfirmPass = findViewById(R.id.inputPasswordAgain);
-
         txtName = findViewById(R.id.inputName);
         txtLastName = findViewById(R.id.inputLastName);
         txtTag = findViewById(R.id.inputTag);
         txtCpf = findViewById(R.id.inputCpf);
-
         txtDateOfBirth = findViewById(R.id.inputDateOfBirth);
         txtGender = findViewById(R.id.inputGender);
         txtTel = findViewById(R.id.inputTel);
-
         btnConfirm = findViewById(R.id.btnConfirm);
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +85,6 @@ public class RegisterActivity extends AppCompatActivity {
                 String dateOfBirth = txtDateOfBirth.getText().toString();
                 Integer gender = Integer.parseInt(txtGender.getText().toString());
                 String tel = txtTel.getText().toString();
-
 
                 user = new User();
                 user.setEmail(email);
@@ -176,6 +174,4 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

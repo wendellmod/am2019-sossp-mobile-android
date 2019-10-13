@@ -43,6 +43,18 @@
 
     <string name="title_activity_profile_user">Perfil</string>
     <string name="input_tag">Tag</string>
+    <string name="text_addresses">Endereços</string>
+    <string name="text_new_address">Novo</string>
+    <string name="text_occurrences">Ocorrências</string>
+
+    <string name="title_activity_new_address">Novo endereço</string>
+    <string name="input_zipcode">CEP</string>
+    <string name="input_address_name">Logradouro</string>
+    <string name="input_neighborhood">Bairro</string>
+    <string name="input_city">Cidade</string>
+    <string name="input_state">Estado</string>
+    <string name="input_number_address">Número</string>
+    <string name="input_complement">Complemento</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

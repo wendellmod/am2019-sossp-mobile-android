@@ -18,18 +18,18 @@ import retrofit2.http.Path;
 public interface AddressService {
 
     @GET("user/{idUser}/address")
-    Call<List<Address>> getAddress();
+    Call<List<Address>> getAddress(@Path("idUser") Long idUser);
 
     @GET("user/{idUser}/address/{idAddress}")
-    Call<Address> getAddressId(@Path("idAddress") Long idAddress);
+    Call<Address> getAddressId(@Path("idUser") Long idUser,@Path("idAddress") Long idAddress);
 
     @POST("user/{idUser}/address")
-    Call<Address> postAddress(@Body Address address);
+    Call<Address> postAddress(@Path("idUser") Long idUser, @Body Address address);
 
     @PUT("user/{idUser}/address/{idAddress}")
-    Call<Address> putAddress(@Path("idAddress") Long idAddress, @Body Address address);
+    Call<Address> putAddress(@Path("idUser") Long idUser, @Path("idAddress") Long idAddress, @Body Address address);
 
     @DELETE("user/{idUser}/address/{idAddress}")
-    Call<Void> deleteAddress(@Path("idAddress") Long idAddress);
+    Call<Void> deleteAddress(@Path("idUser") Long idUser, @Path("idAddress") Long idAddress);
 
 }

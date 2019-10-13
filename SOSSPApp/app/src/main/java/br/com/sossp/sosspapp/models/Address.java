@@ -10,7 +10,7 @@ public class Address {
     private String neighborhood;
     private String city;
     private State state;
-    private int numberAddress;
-    private String addressComplement;
+    private int number;
+    private String complement;
 
 }

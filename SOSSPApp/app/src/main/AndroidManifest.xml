@@ -22,7 +22,10 @@
             android:name=".activity.UserProfileActivity"
             android:parentActivityName=".activity.MainActivity"/>
         <activity android:name=".activity.UserListAddressesActivity" />
-        <activity android:name=".activity.NewAddressActivity" />
+        <activity
+            android:name=".activity.NewAddressActivity"
+            android:parentActivityName=".activity.UserProfileActivity"/>
+
         <activity android:name=".activity.UserAddressActivity" />
         <activity android:name=".activity.UserOccurrenceActivity" />
         <activity android:name=".activity.UserListOccurrencesActivity" />
