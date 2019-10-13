@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.sossp.sosspapp.R;
+import br.com.sossp.sosspapp.RecyclerItemClickListener;
 import br.com.sossp.sosspapp.adapter.AddressesAdapter;
 import br.com.sossp.sosspapp.api.AddressService;
 import br.com.sossp.sosspapp.api.UserService;
@@ -100,6 +101,32 @@ public class UserProfileActivity extends AppCompatActivity {
         recyclerAddresses.setLayoutManager(layoutManager);
         recyclerAddresses.setHasFixedSize(true);
         recyclerAddresses.addItemDecoration( new DividerItemDecoration(this, LinearLayout.VERTICAL));
+
+        // click event for recyclerAddres
+        recyclerAddresses.addOnItemTouchListener(
+                new RecyclerItemClickListener(getApplicationContext(), recyclerAddresses,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                Address address = addressList.get(position);
+                                Long zipcode = address.getZipcode();
+                                startActivity(new Intent(getApplicationContext(), UserAddressActivity.class)
+                                        .putExtra("idUser", idUser)
+                                        .putExtra("idAddress", zipcode));
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            }
+                        }
+                )
+        );
 
     }
 

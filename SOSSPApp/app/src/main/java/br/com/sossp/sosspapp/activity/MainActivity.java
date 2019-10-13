@@ -140,8 +140,6 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_statistics) {
 
-            startActivity(new Intent(this, StatisticsActivity.class).putExtra("idUser", idUser));
-
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_help) {

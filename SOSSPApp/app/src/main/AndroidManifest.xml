@@ -21,24 +21,25 @@
         <activity
             android:name=".activity.UserProfileActivity"
             android:parentActivityName=".activity.MainActivity"/>
-        <activity android:name=".activity.UserListAddressesActivity" />
+
+        <activity android:name=".activity.NewAddressActivity"/>
+
         <activity
-            android:name=".activity.NewAddressActivity"
+            android:name=".activity.UserAddressActivity"
             android:parentActivityName=".activity.UserProfileActivity"/>
 
-        <activity android:name=".activity.UserAddressActivity" />
         <activity android:name=".activity.UserOccurrenceActivity" />
-        <activity android:name=".activity.UserListOccurrencesActivity" />
 
-        <activity
-            android:name=".activity.StatisticsActivity"
-            android:parentActivityName=".activity.MainActivity" />
+        <activity android:name=".activity.UserListOccurrencesActivity" />
 
         <activity
             android:name=".activity.ContactsEmergencyActivity"
             android:parentActivityName=".activity.MainActivity" />
+
         <activity android:name=".activity.SignUpOptionsActivity" />
+
         <activity android:name=".activity.RegisterActivity" />
+
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
