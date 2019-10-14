@@ -31,15 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserProfileActivity extends AppCompatActivity {
 
-    private TextView tvTag;
-    private TextView tvName;
-    private TextView tvLastName;
-    private TextView tvEmail;
-    private TextView tvPassword;
-    private TextView tvCpf;
-    private TextView tvTelContact;
-    private TextView tvGenre;
-    private TextView tvDateBirth;
+    private TextView tvTag, tvName, tvLastName, tvEmail, tvPassword, tvCpf, tvTelContact, tvGenre, tvDateBirth, tvListOccurrences;
 
     private TextView tvBtnNewAddress;
 
@@ -74,6 +66,7 @@ public class UserProfileActivity extends AppCompatActivity {
         tvTelContact = findViewById(R.id.tvUserTel);
         tvGenre = findViewById(R.id.tvUserGenre);
         tvDateBirth = findViewById(R.id.tvUserDateBirth);
+        tvListOccurrences = findViewById(R.id.tvListOccurrences);
 
         tvBtnNewAddress = findViewById(R.id.txtBtnNewAddress);
 
@@ -102,7 +95,7 @@ public class UserProfileActivity extends AppCompatActivity {
         recyclerAddresses.setHasFixedSize(true);
         recyclerAddresses.addItemDecoration( new DividerItemDecoration(this, LinearLayout.VERTICAL));
 
-        // click event for recyclerAddres
+        // click event for recyclerAddresses
         recyclerAddresses.addOnItemTouchListener(
                 new RecyclerItemClickListener(getApplicationContext(), recyclerAddresses,
                         new RecyclerItemClickListener.OnItemClickListener() {
@@ -127,6 +120,16 @@ public class UserProfileActivity extends AppCompatActivity {
                         }
                 )
         );
+
+        // HERE
+        tvListOccurrences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(getApplicationContext(), UserListOccurrencesActivity.class).putExtra("idUser", idUser));
+
+            }
+        });
 
     }
 

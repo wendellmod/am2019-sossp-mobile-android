@@ -28,9 +28,13 @@
             android:name=".activity.UserAddressActivity"
             android:parentActivityName=".activity.UserProfileActivity"/>
 
-        <activity android:name=".activity.UserOccurrenceActivity" />
+        <activity
+            android:name=".activity.UserOccurrenceActivity"
+            android:parentActivityName=".activity.UserProfileActivity"/>
 
-        <activity android:name=".activity.UserListOccurrencesActivity" />
+        <activity
+            android:name=".activity.UserListOccurrencesActivity"
+            android:parentActivityName=".activity.UserProfileActivity"/>
 
         <activity
             android:name=".activity.ContactsEmergencyActivity"

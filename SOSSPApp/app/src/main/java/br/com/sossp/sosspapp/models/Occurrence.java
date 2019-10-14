@@ -1,7 +1,5 @@
 package br.com.sossp.sosspapp.models;
 
-import java.time.LocalDate;
-
 import lombok.Data;
 
 @Data

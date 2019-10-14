@@ -16,6 +16,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.io.IOException;
 import java.util.List;
 
+import br.com.sossp.sosspapp.AddressConverter;
 import br.com.sossp.sosspapp.R;
 import br.com.sossp.sosspapp.api.OccurrenceService;
 import br.com.sossp.sosspapp.models.Occurrence;
@@ -33,6 +34,7 @@ public class NewOccurrenceActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private OccurrenceService occurrenceService;
     private Occurrence occurrence;
+    private AddressConverter addressConverter;
 
     public static final String API_BASE_URL = "http://10.0.2.2:8080/api/";
 
@@ -62,12 +64,14 @@ public class NewOccurrenceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                addressConverter = new AddressConverter();
+
                 String type = txtTypeOccurence.getText().toString();
                 String dateOccurrence = txtDateOccurrence.getText().toString();
                 String currentDate = txtCurrentDateOccurrence.getText().toString();
                 String addressOccurrence = txtAddressOccurrence.getText().toString();
-                double lat = getLocationFromAddress(getApplicationContext(), addressOccurrence).latitude;
-                double lng = getLocationFromAddress(getApplicationContext(), addressOccurrence).longitude;
+                double lat = addressConverter.getLocationFromAddress(getApplicationContext(), addressOccurrence).latitude;
+                double lng = addressConverter.getLocationFromAddress(getApplicationContext(), addressOccurrence).longitude;
 
                 occurrence = new Occurrence();
                 occurrence.setTypeOccurrence(type);
@@ -81,30 +85,6 @@ public class NewOccurrenceActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    public LatLng getLocationFromAddress(Context context, String strAddress) {
-
-        Geocoder coder = new Geocoder(context);
-        List<Address> address;
-        LatLng p1 = null;
-
-        try {
-            // May throw an IOException
-            address = coder.getFromLocationName(strAddress, 5);
-            if (address == null) {
-                return null;
-            }
-
-            Address location = address.get(0);
-            p1 = new LatLng(location.getLatitude(), location.getLongitude() );
-
-        } catch (IOException ex) {
-
-            ex.printStackTrace();
-        }
-
-        return p1;
     }
 
     public void saveOccurrence(Long idUser, Occurrence occurrence) {
