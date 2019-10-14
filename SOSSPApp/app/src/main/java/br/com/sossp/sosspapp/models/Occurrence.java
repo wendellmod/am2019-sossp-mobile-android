@@ -9,10 +9,10 @@ public class Occurrence {
 
     private Long occurrenceId;
     private String typeOccurrence;
-    private LocalDate dateOccurrence;
-    private LocalDate currentDate;
+    private String dateOccurrence;
+    private String currentDate;
     private boolean status;
-    private long longitude;
-    private long latitude;
+    private double longitude;
+    private double latitude;
 
 }

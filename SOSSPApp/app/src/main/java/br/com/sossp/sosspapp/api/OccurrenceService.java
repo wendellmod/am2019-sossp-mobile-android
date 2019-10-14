@@ -16,12 +16,12 @@ import retrofit2.http.Path;
 public interface OccurrenceService {
 
     @GET("user/{idUser}/occurrence")
-    Call<List<Occurrence>> getOccurrence();
+    Call<List<Occurrence>> getOccurrence(@Path("idUser") Long idUser);
 
     @GET("user/{idUser}/occurrence/{idOccurrence}")
-    Call<Occurrence> getOccurrenceId(@Path("idOccurrence") Long idOccurrence);
+    Call<Occurrence> getOccurrenceId(@Path("idUser") Long idUser,@Path("idOccurrence") Long idOccurrence);
 
     @POST("user/{idUser}/occurrence")
-    Call<Occurrence> postOccurrence(@Body Occurrence occurrence);
+    Call<Occurrence> postOccurrence(@Path("idUser") Long idUser,@Body Occurrence occurrence);
 
 }

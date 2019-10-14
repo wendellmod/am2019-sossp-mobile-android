@@ -48,6 +48,12 @@
     <string name="text_occurrences">Ocorrências</string>
 
     <string name="title_activity_user_address">Endereço</string>
+    
+    <string name="title_activity_new_occurrence">Nova Ocorrência</string>
+    <string name="input_type_occurrence">Tipo</string>
+    <string name="input_date_occurrence">Data da ocorrência</string>
+    <string name="input_current_date">Data atual</string>
+    <string name="input_address_occurrence">Endereço</string>
 
     <string name="title_activity_new_address">Novo endereço</string>
     <string name="input_zipcode">CEP</string>
