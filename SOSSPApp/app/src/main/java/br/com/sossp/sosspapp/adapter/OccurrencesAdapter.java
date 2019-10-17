@@ -1,7 +1,5 @@
 package br.com.sossp.sosspapp.adapter;
 
-import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +38,8 @@ public class OccurrencesAdapter extends RecyclerView.Adapter<OccurrencesAdapter.
         addressConverter = new AddressConverter();
         Occurrence occurrence = occurrences.get(position);
 
-        double latitude = occurrence.getLatitude();
-        double longitude = occurrence.getLongitude();
+        double latitude = Double.parseDouble(occurrence.getLatitude());
+        double longitude = Double.parseDouble(occurrence.getLongitude());
         String address = addressConverter.getCompleteAddressString(holder.itemView.getContext(), latitude, longitude);
 
         // --

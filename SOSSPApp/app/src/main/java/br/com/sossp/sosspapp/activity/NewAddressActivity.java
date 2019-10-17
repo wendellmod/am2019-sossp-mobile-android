@@ -2,12 +2,6 @@ package br.com.sossp.sosspapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,19 +10,14 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.List;
-import java.util.Locale;
-
 import br.com.sossp.sosspapp.R;
 import br.com.sossp.sosspapp.api.AddressService;
-import br.com.sossp.sosspapp.api.UserService;
+import br.com.sossp.sosspapp.config.ConfigurationRetrofit;
 import br.com.sossp.sosspapp.models.Address;
 import br.com.sossp.sosspapp.models.State;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewAddressActivity extends AppCompatActivity {
 
@@ -36,11 +25,9 @@ public class NewAddressActivity extends AppCompatActivity {
     private TextInputEditText txtAddressName, txtNeighborhood, txtCity, txtState, txtComplement;
     private Button btnRegisterAddress;
 
-    private Retrofit retrofit;
+    private ConfigurationRetrofit retrofit;
     private AddressService addressService;
     private Address address;
-
-    public static final String API_BASE_URL = "http://10.0.2.2:8080/api/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +35,9 @@ public class NewAddressActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.title_activity_new_address);
         setContentView(R.layout.activity_new_address);
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        addressService = retrofit.create(AddressService.class);
+        retrofit = new ConfigurationRetrofit();
+        retrofit.buildRetrofit();
+        addressService = retrofit.getRetrofit().create(AddressService.class);
 
         txtZipcode = findViewById(R.id.inputZipcode);
         txtAddressName = findViewById(R.id.inputAddressName);

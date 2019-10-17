@@ -20,14 +20,13 @@ import br.com.sossp.sosspapp.RecyclerItemClickListener;
 import br.com.sossp.sosspapp.adapter.AddressesAdapter;
 import br.com.sossp.sosspapp.api.AddressService;
 import br.com.sossp.sosspapp.api.UserService;
+import br.com.sossp.sosspapp.config.ConfigurationRetrofit;
 import br.com.sossp.sosspapp.models.Address;
 import br.com.sossp.sosspapp.models.Genre;
 import br.com.sossp.sosspapp.models.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -38,11 +37,9 @@ public class UserProfileActivity extends AppCompatActivity {
     private RecyclerView recyclerAddresses;
     private List<Address> addressList = new ArrayList<>();
 
-    private Retrofit retrofit;
+    private ConfigurationRetrofit retrofit;
     private UserService userService;
     private AddressService addressService;
-
-    public static final String API_BASE_URL = "http://10.0.2.2:8080/api/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +47,10 @@ public class UserProfileActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.title_activity_profile_user);
         setContentView(R.layout.activity_user_profile);
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        userService = retrofit.create(UserService.class);
-        addressService = retrofit.create(AddressService.class);
+        retrofit = new ConfigurationRetrofit();
+        retrofit.buildRetrofit();
+        userService = retrofit.getRetrofit().create(UserService.class);
+        addressService = retrofit.getRetrofit().create(AddressService.class);
 
         tvTag = findViewById(R.id.tvUserTag);
         tvName = findViewById(R.id.tvUserName);

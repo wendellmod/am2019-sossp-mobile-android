@@ -3,10 +3,8 @@ package br.com.sossp.sosspapp.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,13 +23,12 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import br.com.sossp.sosspapp.R;
 import br.com.sossp.sosspapp.api.UserService;
 import br.com.sossp.sosspapp.config.ConfigurationFirebase;
+import br.com.sossp.sosspapp.config.ConfigurationRetrofit;
 import br.com.sossp.sosspapp.models.Genre;
 import br.com.sossp.sosspapp.models.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -40,11 +37,9 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnConfirm;
 
     private FirebaseAuth firebaseAuth;
-    private Retrofit retrofit;
+    private ConfigurationRetrofit retrofit;
     private UserService userService;
     private User user;
-
-    public static final String API_BASE_URL = "http://10.0.2.2:8080/api/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +48,9 @@ public class RegisterActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setContentView(R.layout.activity_register);
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        userService = retrofit.create(UserService.class);
+        retrofit = new ConfigurationRetrofit();
+        retrofit.buildRetrofit();
+        userService = retrofit.getRetrofit().create(UserService.class);
 
         txtEmail = findViewById(R.id.inputEmail);
         txtPassword = findViewById(R.id.inputPassword);

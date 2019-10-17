@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,29 +13,24 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import br.com.sossp.sosspapp.R;
 import br.com.sossp.sosspapp.RecyclerItemClickListener;
 import br.com.sossp.sosspapp.adapter.OccurrencesAdapter;
 import br.com.sossp.sosspapp.api.OccurrenceService;
-import br.com.sossp.sosspapp.models.Address;
+import br.com.sossp.sosspapp.config.ConfigurationRetrofit;
 import br.com.sossp.sosspapp.models.Occurrence;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserListOccurrencesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerOccurrence;
     private List<Occurrence> occurrenceList = new ArrayList<>();
 
-    private Retrofit retrofit;
+    private ConfigurationRetrofit retrofit;
     private OccurrenceService occurrenceService;
-
-    public static final String API_BASE_URL = "http://10.0.2.2:8080/api/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +38,9 @@ public class UserListOccurrencesActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.title_activity_list_occurrences);
         setContentView(R.layout.activity_user_list_occurrences);
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        occurrenceService = retrofit.create(OccurrenceService.class);
+        retrofit = new ConfigurationRetrofit();
+        retrofit.buildRetrofit();
+        occurrenceService = retrofit.getRetrofit().create(OccurrenceService.class);
 
         Bundle extras = getIntent().getExtras();
         final Long idUser = extras.getLong("idUser");
@@ -95,7 +87,7 @@ public class UserListOccurrencesActivity extends AppCompatActivity {
 
     public void getListOccurrences(Long idUser) {
 
-        Call<List<Occurrence>> call = occurrenceService.getOccurrence(idUser);
+        Call<List<Occurrence>> call = occurrenceService.getOccurrences(idUser);
 
         call.enqueue(new Callback<List<Occurrence>>() {
             @Override

@@ -7,21 +7,18 @@ import android.widget.TextView;
 
 import br.com.sossp.sosspapp.R;
 import br.com.sossp.sosspapp.api.AddressService;
+import br.com.sossp.sosspapp.config.ConfigurationRetrofit;
 import br.com.sossp.sosspapp.models.Address;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserAddressActivity extends AppCompatActivity {
 
     private TextView tvAddressComplete;
 
-    private Retrofit retrofit;
+    private ConfigurationRetrofit retrofit;
     private AddressService addressService;
-
-    public static final String API_BASE_URL = "http://10.0.2.2:8080/api/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +26,9 @@ public class UserAddressActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.title_activity_user_address);
         setContentView(R.layout.activity_user_address);
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        addressService = retrofit.create(AddressService.class);
+        retrofit = new ConfigurationRetrofit();
+        retrofit.buildRetrofit();
+        addressService = retrofit.getRetrofit().create(AddressService.class);
 
         tvAddressComplete = findViewById(R.id.tvAddressComplete);
 

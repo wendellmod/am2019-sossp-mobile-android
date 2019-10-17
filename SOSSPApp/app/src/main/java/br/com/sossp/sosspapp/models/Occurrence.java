@@ -10,7 +10,7 @@ public class Occurrence {
     private String dateOccurrence;
     private String currentDate;
     private boolean status;
-    private double longitude;
-    private double latitude;
+    private String longitude;
+    private String latitude;
 
 }

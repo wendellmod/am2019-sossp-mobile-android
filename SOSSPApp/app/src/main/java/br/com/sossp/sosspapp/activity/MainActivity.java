@@ -28,22 +28,20 @@ import android.view.Menu;
 import br.com.sossp.sosspapp.R;
 import br.com.sossp.sosspapp.api.UserService;
 import br.com.sossp.sosspapp.config.ConfigurationFirebase;
+import br.com.sossp.sosspapp.config.ConfigurationRetrofit;
 import br.com.sossp.sosspapp.fragment.MapFragment;
 import br.com.sossp.sosspapp.models.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Retrofit retrofit;
+    private ConfigurationRetrofit retrofit;
     private UserService userService;
     private User user;
 
-    public static final String API_BASE_URL = "http://10.0.2.2:8080/api/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +50,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        userService = retrofit.create(UserService.class);
+        retrofit = new ConfigurationRetrofit();
+        retrofit.buildRetrofit();
+        userService = retrofit.getRetrofit().create(UserService.class);
 
         FirebaseUser firebaseUser = ConfigurationFirebase.getFirebaseAuth().getCurrentUser();
         String userEmail = firebaseUser.getEmail();
