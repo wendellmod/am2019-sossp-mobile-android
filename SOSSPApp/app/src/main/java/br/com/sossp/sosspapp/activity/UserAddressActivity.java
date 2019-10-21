@@ -35,13 +35,14 @@ public class UserAddressActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         final Long idUser = extras.getLong("idUser");
         final Long idAddress = extras.getLong("idAddress");
+        final Integer numberAddress = extras.getInt("numberAddress");
 
-        getAddressById(idUser, idAddress);
+        getAddressById(idUser, idAddress, numberAddress);
     }
 
-    public void getAddressById(Long idUser, Long idAddress) {
+    public void getAddressById(Long idUser, Long idAddress, Integer numberAddress) {
 
-        Call<Address> call = addressService.getAddressId(idUser, idAddress);
+        Call<Address> call = addressService.getAddressId(idUser, idAddress, numberAddress);
 
         call.enqueue(new Callback<Address>() {
             @Override

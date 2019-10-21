@@ -25,10 +25,4 @@ public interface UserService {
     @POST("user")
     Call<User> postUser(@Body User user);
 
-    @PUT("user/{idUser}")
-    Call<User> putUser(@Path("idUser") Long idUser, @Body User user);
-
-    @DELETE("user/{idUser}")
-    Call<Void> deleteUser(@Path("idUser") Long idUser);
-
 }

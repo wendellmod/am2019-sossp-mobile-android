@@ -23,6 +23,7 @@ import br.com.sossp.sosspapp.api.UserService;
 import br.com.sossp.sosspapp.config.ConfigurationRetrofit;
 import br.com.sossp.sosspapp.models.Address;
 import br.com.sossp.sosspapp.models.Genre;
+import br.com.sossp.sosspapp.models.Occurrence;
 import br.com.sossp.sosspapp.models.User;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -98,9 +99,11 @@ public class UserProfileActivity extends AppCompatActivity {
                             public void onItemClick(View view, int position) {
                                 Address address = addressList.get(position);
                                 Long zipcode = address.getZipcode();
+                                Integer numberAddress = address.getNumber();
                                 startActivity(new Intent(getApplicationContext(), UserAddressActivity.class)
                                         .putExtra("idUser", idUser)
-                                        .putExtra("idAddress", zipcode));
+                                        .putExtra("idAddress", zipcode)
+                                        .putExtra("numberAddress", numberAddress));
                             }
 
                             @Override
@@ -121,7 +124,8 @@ public class UserProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getApplicationContext(), UserListOccurrencesActivity.class).putExtra("idUser", idUser));
+                startActivity(new Intent(getApplicationContext(), UserListOccurrencesActivity.class)
+                        .putExtra("idUser", idUser));
 
             }
         });
@@ -171,7 +175,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
     public void getListAddress(Long idUser) {
 
-        Call<List<Address>> call = addressService.getAddress(idUser);
+        Call<List<Address>> call = addressService.getAddressesUser(idUser);
 
         call.enqueue(new Callback<List<Address>>() {
             @Override

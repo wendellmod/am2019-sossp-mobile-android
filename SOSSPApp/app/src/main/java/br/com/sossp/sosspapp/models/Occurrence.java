@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Occurrence {
 
-    private Long occurrenceId;
+    private long occurrenceId;
     private String typeOccurrence;
     private String dateOccurrence;
     private String currentDate;

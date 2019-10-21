@@ -10,6 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by wendellmod
@@ -17,19 +18,15 @@ import retrofit2.http.Path;
 
 public interface AddressService {
 
-    @GET("user/{idUser}/address")
-    Call<List<Address>> getAddress(@Path("idUser") Long idUser);
+    @GET("user/{idUser}/addresses")
+    Call<List<Address>> getAddressesUser(@Path("idUser") Long idUser);
 
-    @GET("user/{idUser}/address/{idAddress}")
-    Call<Address> getAddressId(@Path("idUser") Long idUser,@Path("idAddress") Long idAddress);
+    @GET("address")
+    Call<Address> getAddressId(@Query(value = "idUser", encoded = true) Long idUser,
+                               @Query(value = "zipcode", encoded = true) Long zipcode,
+                               @Query(value = "numberAddress", encoded = true) Integer numberAddress);
 
     @POST("user/{idUser}/address")
     Call<Address> postAddress(@Path("idUser") Long idUser, @Body Address address);
-
-    @PUT("user/{idUser}/address/{idAddress}")
-    Call<Address> putAddress(@Path("idUser") Long idUser, @Path("idAddress") Long idAddress, @Body Address address);
-
-    @DELETE("user/{idUser}/address/{idAddress}")
-    Call<Void> deleteAddress(@Path("idUser") Long idUser, @Path("idAddress") Long idAddress);
 
 }

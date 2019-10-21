@@ -65,10 +65,10 @@ public class UserListOccurrencesActivity extends AppCompatActivity {
                             @Override
                             public void onItemClick(View view, int position) {
                                 Occurrence occurrence = occurrenceList.get(position);
-                                Long idOccurrence = occurrence.getOccurrenceId();
+                                long occurrenceId = occurrence.getOccurrenceId();
                                 startActivity(new Intent(getApplicationContext(), UserOccurrenceActivity.class)
                                         .putExtra("idUser", idUser)
-                                        .putExtra("idOccurrence", idOccurrence));
+                                        .putExtra("occurrenceId", occurrenceId));
                             }
 
                             @Override
@@ -87,7 +87,7 @@ public class UserListOccurrencesActivity extends AppCompatActivity {
 
     public void getListOccurrences(Long idUser) {
 
-        Call<List<Occurrence>> call = occurrenceService.getOccurrences(idUser);
+        Call<List<Occurrence>> call = occurrenceService.getOccurrencesUser(idUser);
 
         call.enqueue(new Callback<List<Occurrence>>() {
             @Override

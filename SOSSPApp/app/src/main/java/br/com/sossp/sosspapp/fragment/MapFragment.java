@@ -97,6 +97,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         getUserByEmail(userEmail);
 
+        getOccurrencesMap();
+
     }
 
     public void getUserLocation() {
@@ -160,7 +162,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     User userResponse = response.body();
                     Long idUser = userResponse.getUserId();
 
-                    getOccurrencesMap(idUser);
+
 
                 }
             }
@@ -173,9 +175,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
-    public void getOccurrencesMap(Long idUser) {
+    public void getOccurrencesMap() {
 
-        Call<List<Occurrence>> call = occurrenceService.getAllOccurrences(idUser);
+        Call<List<Occurrence>> call = occurrenceService.getAllOccurrences();
 
         call.enqueue(new Callback<List<Occurrence>>() {
             @Override
@@ -191,7 +193,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         double longitude = Double.valueOf(occurrence.getLongitude());
                         LatLng occurrencesMapView = new LatLng(latitude, longitude);
 
-                        mMap.clear();
                         mMap.addMarker(
                                 new MarkerOptions()
                                         .position(occurrencesMapView)

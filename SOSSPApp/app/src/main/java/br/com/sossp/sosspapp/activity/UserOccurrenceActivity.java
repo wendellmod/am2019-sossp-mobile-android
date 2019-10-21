@@ -40,7 +40,7 @@ public class UserOccurrenceActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         final Long idUser = extras.getLong("idUser");
-        final Long idOccurrence = extras.getLong("idOccurrence");
+        final long idOccurrence = extras.getLong("occurrenceId");
 
         getOccurrence(idUser, idOccurrence);
 
