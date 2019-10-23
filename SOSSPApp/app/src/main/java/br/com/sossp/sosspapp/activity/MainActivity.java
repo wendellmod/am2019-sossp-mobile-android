@@ -1,6 +1,10 @@
 package br.com.sossp.sosspapp.activity;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -8,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
@@ -24,12 +29,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.Menu;
+import android.widget.TextView;
 
 import br.com.sossp.sosspapp.R;
 import br.com.sossp.sosspapp.api.UserService;
 import br.com.sossp.sosspapp.config.ConfigurationFirebase;
 import br.com.sossp.sosspapp.config.ConfigurationRetrofit;
 import br.com.sossp.sosspapp.fragment.MapFragment;
+import br.com.sossp.sosspapp.helper.Permissions;
 import br.com.sossp.sosspapp.models.User;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,6 +68,7 @@ public class MainActivity extends AppCompatActivity
 
         getUserByEmail(userEmail);
 
+
         MapFragment mapFragment = new MapFragment();
         getFragment(mapFragment);
 
@@ -80,6 +88,20 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        for (int resultPermission : grantResults) {
+
+            if (resultPermission == PackageManager.PERMISSION_DENIED) {
+                alertValidationPermission();
+            }
+
+        }
+
     }
 
     @Override
@@ -134,9 +156,9 @@ public class MainActivity extends AppCompatActivity
 
             startActivity(new Intent(this, ContactsEmergencyActivity.class).putExtra("idUser", idUser));
 
-        } else if (id == R.id.nav_statistics) {
-
         } else if (id == R.id.nav_settings) {
+
+            startActivity(new Intent(this, SettingsActivity.class).putExtra("idUser", idUser));
 
         } else if (id == R.id.nav_help) {
 
@@ -181,6 +203,24 @@ public class MainActivity extends AppCompatActivity
     public void toProfile(View view) {
         Long idUser = user.getUserId();
         startActivity(new Intent(this, UserProfileActivity.class).putExtra("idUser", idUser));
+    }
+
+    private void alertValidationPermission(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Permissões Negadas");
+        builder.setMessage("Para utilizar o app é necessário aceitar as permissões");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
     }
 
 }

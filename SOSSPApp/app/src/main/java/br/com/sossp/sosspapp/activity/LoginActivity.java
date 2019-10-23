@@ -3,6 +3,7 @@ package br.com.sossp.sosspapp.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,9 +18,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseUser;
 
 import br.com.sossp.sosspapp.R;
 import br.com.sossp.sosspapp.config.ConfigurationFirebase;
+import br.com.sossp.sosspapp.helper.Permissions;
 import br.com.sossp.sosspapp.models.User;
 
 public class LoginActivity extends AppCompatActivity {
@@ -30,11 +33,19 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnSignInEmail;
     private User user;
 
+    private String[] permissions = new String[] {
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
+
+        // validate permissions
+        Permissions.validatePermissions(permissions, this, 1);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -71,6 +82,19 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        currentUser();
+    }
+
+    public void currentUser() {
+        firebaseAuth = ConfigurationFirebase.getFirebaseAuth();
+        if (firebaseAuth.getCurrentUser() != null) {
+            goToMainActivity();
+        }
     }
 
     public void validateLogin() {

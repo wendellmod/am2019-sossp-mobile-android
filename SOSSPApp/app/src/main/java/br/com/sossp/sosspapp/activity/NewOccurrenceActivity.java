@@ -31,7 +31,6 @@ public class NewOccurrenceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle(R.string.title_activity_new_occurrence);
         setContentView(R.layout.activity_new_occurrence);
 
         retrofit = new ConfigurationRetrofit();

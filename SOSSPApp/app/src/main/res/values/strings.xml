@@ -51,12 +51,17 @@
 
     <string name="title_activity_user_occurrence">Ocorrência</string>
     <string name="input_status_occurrence">Status</string>
-    
+
     <string name="title_activity_new_occurrence">Nova Ocorrência</string>
     <string name="input_type_occurrence">Tipo</string>
     <string name="input_date_occurrence">Data da ocorrência</string>
     <string name="input_current_date">Data atual</string>
     <string name="input_address_occurrence">Endereço</string>
+
+    <string name="title_activity_contacts_emergency">Contatos de emergência</string>
+
+    <string name="title_activity_settings">Configurações</string>
+    <string name="btn_sign_out">Sair</string>
 
     <string name="title_activity_new_address">Novo endereço</string>
     <string name="input_zipcode">CEP</string>

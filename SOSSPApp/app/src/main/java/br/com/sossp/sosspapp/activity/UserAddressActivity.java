@@ -23,7 +23,6 @@ public class UserAddressActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle(R.string.title_activity_user_address);
         setContentView(R.layout.activity_user_address);
 
         retrofit = new ConfigurationRetrofit();

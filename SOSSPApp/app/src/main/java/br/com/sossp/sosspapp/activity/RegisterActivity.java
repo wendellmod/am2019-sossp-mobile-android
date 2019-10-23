@@ -3,6 +3,7 @@ package br.com.sossp.sosspapp.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -143,6 +144,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if ( task.isSuccessful() ){
 
                     saveUser(user);
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
 
                 }else {

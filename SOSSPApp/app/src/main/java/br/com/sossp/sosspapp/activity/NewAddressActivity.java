@@ -32,7 +32,6 @@ public class NewAddressActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle(R.string.title_activity_new_address);
         setContentView(R.layout.activity_new_address);
 
         retrofit = new ConfigurationRetrofit();

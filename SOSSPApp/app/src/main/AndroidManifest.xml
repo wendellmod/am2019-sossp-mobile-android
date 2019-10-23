@@ -13,34 +13,48 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:screenOrientation="portrait">
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".activity.MainActivity" />
 
         <activity
             android:name=".activity.NewOccurrenceActivity"
+            android:label="@string/title_activity_new_occurrence"
             android:parentActivityName=".activity.MainActivity" />
 
         <activity
             android:name=".activity.UserProfileActivity"
-            android:parentActivityName=".activity.MainActivity"/>
+            android:label="@string/title_activity_profile_user"
+            android:parentActivityName=".activity.MainActivity" />
 
-        <activity android:name=".activity.NewAddressActivity"/>
+        <activity
+            android:name=".activity.NewAddressActivity"
+            android:label="@string/title_activity_new_address"
+            android:parentActivityName=".activity.UserProfileActivity" />
 
         <activity
             android:name=".activity.UserAddressActivity"
-            android:parentActivityName=".activity.UserProfileActivity"/>
+            android:label="@string/title_activity_user_address"
+            android:parentActivityName=".activity.UserProfileActivity" />
 
         <activity
             android:name=".activity.UserOccurrenceActivity"
-            android:parentActivityName=".activity.UserProfileActivity"/>
+            android:label="@string/title_activity_user_occurrence"
+            android:parentActivityName=".activity.UserListOccurrencesActivity" />
 
         <activity
             android:name=".activity.UserListOccurrencesActivity"
-            android:parentActivityName=".activity.UserProfileActivity"/>
+            android:label="@string/title_activity_list_occurrences"
+            android:parentActivityName=".activity.UserProfileActivity" />
 
         <activity
             android:name=".activity.ContactsEmergencyActivity"
+            android:label="@string/title_activity_contacts_emergency"
             android:parentActivityName=".activity.MainActivity" />
 
         <activity android:name=".activity.SignUpOptionsActivity" />
@@ -48,6 +62,7 @@
         <activity android:name=".activity.RegisterActivity" />
 
         <activity android:name=".activity.LoginActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

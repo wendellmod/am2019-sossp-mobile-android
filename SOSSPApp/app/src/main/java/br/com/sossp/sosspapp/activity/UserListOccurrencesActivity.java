@@ -35,7 +35,6 @@ public class UserListOccurrencesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle(R.string.title_activity_list_occurrences);
         setContentView(R.layout.activity_user_list_occurrences);
 
         retrofit = new ConfigurationRetrofit();
